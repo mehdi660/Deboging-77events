@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { getMonth } from "../../helpers/Date";
 import { useData } from "../../contexts/DataContext";
@@ -6,7 +7,7 @@ import "./style.scss";
 const EventCard = ({
   imageSrc,
   imageAlt,
-  date = Date(),
+  date = new Date(),
   title,
   label,
   small = false,
@@ -14,10 +15,15 @@ const EventCard = ({
 }) => {
   const { data } = useData();
 
-  const defaultImageSrc = data?.events?.[data.events.length - 1]?.cover || "";
-  const defaultImageAlt =
-    data?.events?.[data.events.length - 1]?.description || "";
-  const defaultTitle = data?.events?.[data.events.length - 1]?.title || "";
+  const sortedEvents = data?.events || [];
+  sortedEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Sélection du dernier événement en date
+  const latestEvent = sortedEvents.length > 0 ? sortedEvents[0] : {};
+
+  const defaultImageSrc = latestEvent?.cover || "";
+  const defaultImageAlt = latestEvent?.description || "";
+  const defaultTitle = latestEvent?.title || "";
 
   return (
     <div

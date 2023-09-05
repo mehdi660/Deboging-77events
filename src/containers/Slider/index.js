@@ -8,6 +8,7 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
+    // ! Changement de sens du symbole <
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
 
@@ -47,7 +48,9 @@ const Slider = () => {
                   key={`${event.id}-${radioIdx}`}
                   type="radio"
                   name="radio-button"
+                  // ! idx au lieu de index
                   checked={index === radioIdx}
+                  // !  Ajout de read only
                   readOnly
                 />
               ))}

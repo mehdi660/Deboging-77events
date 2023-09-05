@@ -6,16 +6,19 @@ import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () =>
   new Promise((resolve) => {
+    //  ! Reduction du timiout, initialement a 1000
     setTimeout(resolve, 900);
   });
 
 const Form = ({ onSuccess, onError }) => {
+  // ! creation de formSubmitted pour savoir si le formulaire a été envoyé, si oui, appel de la fonction onSuccess
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
       setSending(true);
+      // ! Ajout de setFormSubmitted et onSuccess
       setFormSubmitted(true);
       onSuccess();
       // We try to call mockContactApi
@@ -31,8 +34,8 @@ const Form = ({ onSuccess, onError }) => {
   );
   return (
     <form onSubmit={sendContact}>
+      {/*! Si formSubmitted true, message de confirmation envoyé */}
       {formSubmitted && <div>Le formulaire a été envoyé avec succès !</div>}
-
       <div className="row">
         <div className="col">
           <Field placeholder="" label="Nom" />

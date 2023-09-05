@@ -13,4 +13,6 @@ export const MONTHS = {
   12: "décembre",
 };
 
+//  ! Rajout de +1 et remplacement du tableau commencant a 0 a commencement a 1
+
 export const getMonth = (date) => MONTHS[date.getMonth() + 1];
