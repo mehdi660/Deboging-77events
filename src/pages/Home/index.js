@@ -120,7 +120,8 @@ const Page = () => {
             title={last?.title}
             date={new Date(last?.date)}
             small
-            label="boom"
+            // ! Rajout du label pour le type car non renseigné
+            label={last?.type}
           />
         </div>
         <div className="col contact">

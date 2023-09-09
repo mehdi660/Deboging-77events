@@ -24,6 +24,7 @@ const EventCard = ({
   const defaultImageSrc = latestEvent?.cover || "";
   const defaultImageAlt = latestEvent?.description || "";
   const defaultTitle = latestEvent?.title || "";
+  const defaultType = latestEvent?.type || "";
 
   return (
     <div
@@ -37,7 +38,7 @@ const EventCard = ({
           src={imageSrc || defaultImageSrc}
           alt={imageAlt || defaultImageAlt}
         />
-        <div className="EventCard__label">{label}</div>
+        <div className="EventCard__label">{label || defaultType}</div>
       </div>
       <div className="EventCard__descriptionContainer">
         <div className="EventCard__title">{title || defaultTitle}</div>
@@ -53,7 +54,7 @@ EventCard.propTypes = {
   date: PropTypes.instanceOf(Date),
   title: PropTypes.string,
   small: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
 };
 
 export default EventCard;
